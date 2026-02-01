@@ -7,7 +7,7 @@
 body {
   text-align: center;
   font-family: Arial;
-  background: linear-gradient(to right, #ff758c, #ff7eb3);
+  background: linear-gradient(135deg, #ff9aa2, #ffc3a0, #ffafbd);
   margin-top: 120px;
   overflow: hidden;
 }
@@ -34,7 +34,7 @@ button {
 }
 
 #noBtn {
-  background: #333;
+  background: #444;
   color: white;
   position: absolute;
 }
@@ -82,11 +82,22 @@ button {
        box-shadow:0 4px 15px rgba(0,0,0,0.3);
      ">
 
+<!-- Background Music -->
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
 <script>
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 
 let yesScale = 1;
+
+/* Music plays on first click */
+document.addEventListener("click", function () {
+  const music = document.getElementById("bgMusic");
+  if (music) music.play();
+}, { once: true });
 
 /* NO button escape + YES grows */
 function moveButton() {
@@ -111,7 +122,7 @@ function accepted() {
       color:white;
       font-family:Arial;
       padding:20px;
-      background: linear-gradient(to right, #ff758c, #ff7eb3);
+      background: linear-gradient(135deg, #ff9aa2, #ffc3a0, #ffafbd);
       height:100vh;
     ">
       <h1 style="font-size:42px;">Yay Aditi ❤️</h1>
