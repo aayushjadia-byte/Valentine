@@ -63,24 +63,17 @@ noBtn.addEventListener("click", moveButton);
 function accepted() {
   document.body.innerHTML = `
     <div style="text-align:center;margin-top:120px;color:white;">
-      <h1>Yay Aditi ❤️</h1>
-      <h2>You just made my day!</h2>
-      <p>Best Valentine Ever ✨</p>
+      <h1 style="font-size:42px;">Aditi ❤️</h1>
+      <h2>You just made me the happiest person alive I love you.</h2>
+      <p style="font-size:22px;margin-top:20px;">
+        Can't wait to celebrate this Valentine together.
+      </p>
+      <p style="font-size:18px;margin-top:20px;">
+        Forever starts with you ✨
+      </p>
     </div>
   `;
-
-  for (let i = 0; i < 80; i++) {
-    const confetti = document.createElement("div");
-    confetti.innerHTML = "🎉";
-    confetti.style.position = "fixed";
-    confetti.style.left = Math.random() * 100 + "vw";
-    confetti.style.top = "-10px";
-    confetti.style.fontSize = "24px";
-    confetti.style.animation = "fall 3s linear forwards";
-    document.body.appendChild(confetti);
-
-    setTimeout(() => confetti.remove(), 3000);
-  }
+}
 }
 }
 </script>
