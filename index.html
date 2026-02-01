@@ -137,34 +137,20 @@ noBtn.addEventListener("click",moveButton);
 /* YES accepted + music plays */
 function accepted(){
   const music = document.getElementById("bgMusic");
+  music.play();
 
-  music.play().then(() => {
-
-    setTimeout(() => {
-      document.body.innerHTML = `
-      <div style="
-      min-height:100vh;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      text-align:center;
-      background:linear-gradient(135deg,#ff9aa2,#ffc3a0,#ffafbd);
+  document.querySelector(".container").innerHTML = `
+    <div style="
       color:white;
       font-family:Arial;
       padding:20px;">
-      <div>
       <h1>Yay Aditi ❤️</h1>
       <p>You made my day!</p>
       <p>I'm the happiest person alive!</p>
       <h2>I Love You ❤️</h2>
-      </div>
-      </div>`;
-    }, 300);
-
-  }).catch(() => {
-    alert("Tap YES again ❤️");
-  });
+    </div>`;
 }
+
 
 
 /* Love timer */
