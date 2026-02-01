@@ -12,7 +12,7 @@ body{
   overflow:hidden;
 }
 
-/* Layout */
+/* Center layout */
 .container{
   min-height:100vh;
   display:flex;
@@ -69,25 +69,13 @@ button{
   box-shadow:0 4px 15px rgba(0,0,0,0.3);
 }
 
-/* Music button */
-#musicBtn{
-  position:fixed;
-  bottom:15px;
-  left:50%;
-  transform:translateX(-50%);
-  padding:8px 18px;
-  font-size:14px;
-  border-radius:20px;
-  background:white;
-  color:#ff3366;
-}
-
-/* Hearts */
+/* Falling hearts */
 .heart{
   position:fixed;
   top:-10px;
   font-size:18px;
   animation:fall linear forwards;
+  pointer-events:none;
 }
 
 @keyframes fall{
@@ -119,8 +107,7 @@ button{
 
 </div>
 
-<button id="musicBtn">▶ Music</button>
-
+<!-- External music -->
 <audio id="bgMusic" loop>
   <source src="https://files.catbox.moe/pz5wkp.mp3" type="audio/mpeg">
 </audio>
@@ -128,17 +115,8 @@ button{
 <script>
 const yesBtn=document.getElementById("yesBtn");
 const noBtn=document.getElementById("noBtn");
-const musicBtn=document.getElementById("musicBtn");
-const music=document.getElementById("bgMusic");
 
 let yesScale=1;
-
-/* MUSIC PLAY FIX */
-musicBtn.addEventListener("click", () => {
-  music.muted = false;
-  music.play();
-  musicBtn.innerText = "🎵 Playing";
-});
 
 /* NO runs away */
 function moveButton(){
@@ -156,8 +134,11 @@ function moveButton(){
 noBtn.addEventListener("mouseover",moveButton);
 noBtn.addEventListener("click",moveButton);
 
-/* YES accepted */
+/* YES accepted + music plays */
 function accepted(){
+  const music=document.getElementById("bgMusic");
+  music.play();
+
 document.body.innerHTML=`
 <div style="
 min-height:100vh;
