@@ -53,19 +53,28 @@ button {
     transform: translateY(100vh);
   }
 }
+
+#loveTimer {
+  color: white;
+  margin-top: 15px;
+  font-size: 18px;
+}
 </style>
 </head>
 
 <body>
 
 <h1>Aditi, will you be my Valentine? ❤️</h1>
-<h2 id="loveTimer" style="color:white;margin-top:10px;"></h2>
+
+<h2 id="loveTimer"></h2>
+
 <button id="yesBtn" onclick="accepted()">YES ❤️</button>
 <button id="noBtn">NO</button>
 
 <script>
 const noBtn = document.getElementById("noBtn");
 
+/* NO button runs away */
 function moveButton() {
   const x = Math.random() * (window.innerWidth - 100);
   const y = Math.random() * (window.innerHeight - 100);
@@ -103,20 +112,7 @@ function accepted() {
   `;
 }
 
-/* Falling hearts generator */
-function createHeart() {
-  const heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerHTML = "❤️";
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
-  document.body.appendChild(heart);
-
-  setTimeout(() => heart.remove(), 6000);
-}
-
-setInterval(createHeart, 500);
-</script>
+/* Love timer */
 function updateLoveTimer() {
   const startDate = new Date("May 31, 2025 21:30:00").getTime();
   const now = new Date().getTime();
@@ -133,5 +129,21 @@ function updateLoveTimer() {
 
 setInterval(updateLoveTimer, 60000);
 updateLoveTimer();
+
+/* Falling hearts generator */
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 6000);
+}
+
+setInterval(createHeart, 500);
+</script>
+
 </body>
 </html>
