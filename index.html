@@ -37,6 +37,22 @@ button {
   color: white;
   position: absolute;
 }
+
+/* Falling hearts */
+.heart {
+  position: fixed;
+  top: -10px;
+  color: #ff4d6d;
+  font-size: 18px;
+  animation: fall linear forwards;
+  pointer-events: none;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh);
+  }
+}
 </style>
 </head>
 
@@ -60,6 +76,7 @@ function moveButton() {
 noBtn.addEventListener("mouseover", moveButton);
 noBtn.addEventListener("click", moveButton);
 
+/* YES click message */
 function accepted() {
   document.body.innerHTML = `
     <div style="
@@ -85,27 +102,8 @@ function accepted() {
     </div>
   `;
 }
-  }
-}
-</script>
-<style>
-.heart {
-  position: fixed;
-  top: -10px;
-  color: #ff4d6d;
-  font-size: 18px;
-  animation: fall linear forwards;
-  pointer-events: none;
-}
 
-@keyframes fall {
-  to {
-    transform: translateY(100vh);
-  }
-}
-</style>
-
-<script>
+/* Falling hearts generator */
 function createHeart() {
   const heart = document.createElement("div");
   heart.className = "heart";
@@ -119,5 +117,6 @@ function createHeart() {
 
 setInterval(createHeart, 500);
 </script>
+
 </body>
 </html>
