@@ -59,7 +59,7 @@ button {
 <body>
 
 <h1>Aditi, will you be my Valentine? ❤️</h1>
-
+<h2 id="loveTimer" style="color:white;margin-top:10px;"></h2>
 <button id="yesBtn" onclick="accepted()">YES ❤️</button>
 <button id="noBtn">NO</button>
 
@@ -117,6 +117,21 @@ function createHeart() {
 
 setInterval(createHeart, 500);
 </script>
+function updateLoveTimer() {
+  const startDate = new Date("May 31, 2025 21:30:00").getTime();
+  const now = new Date().getTime();
 
+  const diff = now - startDate;
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+
+  document.getElementById("loveTimer").innerHTML =
+    `Together since ❤️<br>${days} days ${hours} hours ${minutes} minutes<br>And forever to go ✨`;
+}
+
+setInterval(updateLoveTimer, 60000);
+updateLoveTimer();
 </body>
 </html>
