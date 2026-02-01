@@ -38,6 +38,13 @@ button {
   position: absolute;
 }
 
+/* Timer text */
+#loveTimer {
+  color: white;
+  margin-top: 15px;
+  font-size: 18px;
+}
+
 /* Falling hearts */
 .heart {
   position: fixed;
@@ -52,12 +59,6 @@ button {
   to {
     transform: translateY(100vh);
   }
-}
-
-#loveTimer {
-  color: white;
-  margin-top: 15px;
-  font-size: 18px;
 }
 </style>
 </head>
@@ -74,7 +75,7 @@ button {
 <script>
 const noBtn = document.getElementById("noBtn");
 
-/* NO button runs away */
+/* NO button escape */
 function moveButton() {
   const x = Math.random() * (window.innerWidth - 100);
   const y = Math.random() * (window.innerHeight - 100);
@@ -94,6 +95,8 @@ function accepted() {
       color:white;
       font-family:Arial;
       padding:20px;
+      background: linear-gradient(to right, #ff758c, #ff7eb3);
+      height:100vh;
     ">
       <h1 style="font-size:42px;">Yay Aditi ❤️</h1>
 
@@ -124,13 +127,17 @@ function updateLoveTimer() {
   const minutes = Math.floor((diff / (1000 * 60)) % 60);
 
   document.getElementById("loveTimer").innerHTML =
-    `Together since ❤️<br>${days} days ${hours} hours ${minutes} minutes<br>And forever to go ✨`;
+    "Together since ❤️<br>" +
+    days + " days " +
+    hours + " hours " +
+    minutes + " minutes<br>" +
+    "And forever to go ✨";
 }
 
 setInterval(updateLoveTimer, 60000);
 updateLoveTimer();
 
-/* Falling hearts generator */
+/* Falling hearts */
 function createHeart() {
   const heart = document.createElement("div");
   heart.className = "heart";
