@@ -39,6 +39,12 @@ button {
   position: absolute;
 }
 
+#musicBtn {
+  background: white;
+  color: #ff3366;
+  font-weight: bold;
+}
+
 #loveTimer {
   color: white;
   margin-top: 15px;
@@ -69,20 +75,19 @@ button {
 
 <h2 id="loveTimer"></h2>
 
+<button id="musicBtn" onclick="playMusic()">▶ Play Music ❤️</button>
+
+<br>
+
 <button id="yesBtn" onclick="accepted()">YES ❤️</button>
 <button id="noBtn">NO</button>
 
 <br><br>
 
 <img src="photo.jpg"
-     style="
-       width:220px;
-       border-radius:15px;
-       margin-top:15px;
-       box-shadow:0 4px 15px rgba(0,0,0,0.3);
-     ">
+     style="width:220px;border-radius:15px;margin-top:15px;
+     box-shadow:0 4px 15px rgba(0,0,0,0.3);">
 
-<!-- Background Music -->
 <audio id="bgMusic" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
@@ -90,16 +95,17 @@ button {
 <script>
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
+const music = document.getElementById("bgMusic");
 
 let yesScale = 1;
 
-/* Music plays on first click */
-document.addEventListener("click", function () {
-  const music = document.getElementById("bgMusic");
-  if (music) music.play();
-}, { once: true });
+/* Music button */
+function playMusic() {
+  music.play();
+  document.getElementById("musicBtn").innerText = "🎵 Music Playing";
+}
 
-/* NO button escape + YES grows */
+/* NO escape + YES grows */
 function moveButton() {
   const x = Math.random() * (window.innerWidth - 100);
   const y = Math.random() * (window.innerHeight - 100);
@@ -113,7 +119,7 @@ function moveButton() {
 noBtn.addEventListener("mouseover", moveButton);
 noBtn.addEventListener("click", moveButton);
 
-/* YES click message */
+/* YES message */
 function accepted() {
   document.body.innerHTML = `
     <div style="
@@ -126,15 +132,10 @@ function accepted() {
       height:100vh;
     ">
       <h1 style="font-size:42px;">Yay Aditi ❤️</h1>
-
-      <p style="font-size:26px;margin-top:20px;">
-        You made my day!
-      </p>
-
+      <p style="font-size:26px;margin-top:20px;">You made my day!</p>
       <p style="font-size:26px;margin-top:10px;">
         I'm the happiest person alive!
       </p>
-
       <p style="font-size:30px;margin-top:25px;font-weight:bold;">
         I Love You ❤️
       </p>
