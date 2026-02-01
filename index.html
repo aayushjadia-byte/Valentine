@@ -3,34 +3,53 @@
 <head>
 <title>Aditi Be My Valentine ❤️</title>
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
 body {
-  text-align: center;
+  margin: 0;
   font-family: Arial;
   background: linear-gradient(135deg, #ff9aa2, #ffc3a0, #ffafbd);
-  margin-top: 120px;
   overflow: hidden;
+}
+
+/* Center everything */
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
 }
 
 h1 {
   color: white;
-  font-size: 36px;
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+#loveTimer {
+  color: white;
+  font-size: 16px;
+  margin-bottom: 10px;
 }
 
 button {
-  padding: 15px 30px;
-  font-size: 20px;
+  padding: 14px 26px;
+  font-size: 18px;
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  margin: 10px;
+  margin: 8px;
   transition: transform 0.2s ease;
 }
 
 #yesBtn {
   background: #ff3366;
   color: white;
-  font-size: 24px;
+  font-size: 22px;
 }
 
 #noBtn {
@@ -39,16 +58,25 @@ button {
   position: absolute;
 }
 
-#musicBtn {
-  background: white;
-  color: #ff3366;
-  font-weight: bold;
+/* Photo */
+.photo {
+  width: 200px;
+  border-radius: 15px;
+  margin-top: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
-#loveTimer {
-  color: white;
-  margin-top: 15px;
-  font-size: 18px;
+/* Music button at bottom */
+#musicBtn {
+  position: fixed;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 18px;
+  font-size: 14px;
+  background: white;
+  color: #ff3366;
+  border-radius: 20px;
 }
 
 /* Falling hearts */
@@ -66,27 +94,31 @@ button {
     transform: translateY(100vh);
   }
 }
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  h1 { font-size: 24px; }
+  .photo { width: 160px; }
+}
 </style>
 </head>
 
 <body>
 
+<div class="container">
+
 <h1>Aditi, will you be my Valentine? ❤️</h1>
 
-<h2 id="loveTimer"></h2>
-
-<button id="musicBtn" onclick="playMusic()">▶ Play Music ❤️</button>
-
-<br>
+<div id="loveTimer"></div>
 
 <button id="yesBtn" onclick="accepted()">YES ❤️</button>
 <button id="noBtn">NO</button>
 
-<br><br>
+<img src="photo.jpg" class="photo">
 
-<img src="photo.jpg"
-     style="width:220px;border-radius:15px;margin-top:15px;
-     box-shadow:0 4px 15px rgba(0,0,0,0.3);">
+</div>
+
+<button id="musicBtn" onclick="playMusic()">▶ Music</button>
 
 <audio id="bgMusic" loop>
   <source src="music.mp3" type="audio/mpeg">
@@ -99,55 +131,53 @@ const music = document.getElementById("bgMusic");
 
 let yesScale = 1;
 
-/* Music button */
-function playMusic() {
+/* Music play */
+function playMusic(){
   music.play();
-  document.getElementById("musicBtn").innerText = "🎵 Music Playing";
+  document.getElementById("musicBtn").innerText = "🎵 Playing";
 }
 
-/* NO escape + YES grows */
+/* NO runs + YES grows */
 function moveButton() {
   const x = Math.random() * (window.innerWidth - 100);
   const y = Math.random() * (window.innerHeight - 100);
   noBtn.style.left = x + "px";
   noBtn.style.top = y + "px";
 
-  yesScale += 0.15;
+  yesScale += 0.12;
   yesBtn.style.transform = "scale(" + yesScale + ")";
 }
 
 noBtn.addEventListener("mouseover", moveButton);
 noBtn.addEventListener("click", moveButton);
 
-/* YES message */
+/* YES accepted */
 function accepted() {
   document.body.innerHTML = `
     <div style="
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
       text-align:center;
-      margin-top:120px;
+      background: linear-gradient(135deg,#ff9aa2,#ffc3a0,#ffafbd);
       color:white;
       font-family:Arial;
       padding:20px;
-      background: linear-gradient(135deg, #ff9aa2, #ffc3a0, #ffafbd);
-      height:100vh;
     ">
-      <h1 style="font-size:42px;">Yay Aditi ❤️</h1>
-      <p style="font-size:26px;margin-top:20px;">You made my day!</p>
-      <p style="font-size:26px;margin-top:10px;">
-        I'm the happiest person alive!
-      </p>
-      <p style="font-size:30px;margin-top:25px;font-weight:bold;">
-        I Love You ❤️
-      </p>
-    </div>
-  `;
+      <div>
+        <h1>Yay Aditi ❤️</h1>
+        <p>You made my day!</p>
+        <p>I'm the happiest person alive!</p>
+        <h2>I Love You ❤️</h2>
+      </div>
+    </div>`;
 }
 
 /* Love timer */
 function updateLoveTimer() {
   const startDate = new Date("May 31, 2025 21:30:00").getTime();
   const now = new Date().getTime();
-
   const diff = now - startDate;
 
   const days = Math.floor(diff / (1000 * 60 * 60 * 24));
@@ -158,8 +188,7 @@ function updateLoveTimer() {
     "Together since ❤️<br>" +
     days + " days " +
     hours + " hours " +
-    minutes + " minutes<br>" +
-    "And forever to go ✨";
+    minutes + " minutes<br>And forever to go ✨";
 }
 
 setInterval(updateLoveTimer, 60000);
@@ -173,7 +202,6 @@ function createHeart() {
   heart.style.left = Math.random() * 100 + "vw";
   heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
   document.body.appendChild(heart);
-
   setTimeout(() => heart.remove(), 6000);
 }
 
