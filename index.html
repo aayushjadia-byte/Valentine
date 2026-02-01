@@ -12,7 +12,7 @@ body{
   overflow:hidden;
 }
 
-/* Center layout */
+/* Layout */
 .container{
   min-height:100vh;
   display:flex;
@@ -121,7 +121,7 @@ button{
 
 <button id="musicBtn">▶ Music</button>
 
-<audio id="bgMusic" loop preload="auto">
+<audio id="bgMusic" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
@@ -134,12 +134,10 @@ const music=document.getElementById("bgMusic");
 let yesScale=1;
 
 /* MUSIC PLAY FIX */
-musicBtn.addEventListener("click",()=>{
-  music.play().then(()=>{
-    musicBtn.innerText="🎵 Playing";
-  }).catch(()=>{
-    alert("Tap again to enable sound");
-  });
+musicBtn.addEventListener("click", () => {
+  music.muted = false;
+  music.play();
+  musicBtn.innerText = "🎵 Playing";
 });
 
 /* NO runs away */
