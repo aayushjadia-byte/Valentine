@@ -65,6 +65,36 @@ function accepted() {
     "<h1>Yay Aditi ❤️<br>You made my day!</h1>";
 }
 </script>
+<style>
+.heart {
+  position: fixed;
+  top: -10px;
+  color: #ff4d6d;
+  font-size: 18px;
+  animation: fall linear forwards;
+  pointer-events: none;
+}
 
+@keyframes fall {
+  to {
+    transform: translateY(100vh);
+  }
+}
+</style>
+
+<script>
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 6000);
+}
+
+setInterval(createHeart, 500);
+</script>
 </body>
 </html>
