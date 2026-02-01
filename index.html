@@ -12,7 +12,7 @@ body {
   overflow: hidden;
 }
 
-/* Center content */
+/* CENTER EVERYTHING */
 .container {
   min-height: 100vh;
   display: flex;
@@ -24,14 +24,20 @@ body {
 
 h1 {
   color: white;
-  font-size: 32px;
+  font-size: 30px;
   margin: 10px;
 }
 
 #loveTimer {
   color: white;
   font-size: 16px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+/* BUTTONS */
+.buttons {
+  position: relative;
+  margin-bottom: 15px;
 }
 
 button {
@@ -48,26 +54,28 @@ button {
   background:#ff3366;
   color:white;
   font-size:22px;
+  z-index: 2;
 }
 
 #noBtn {
   background:#444;
   color:white;
   position:absolute;
+  left:120px;
+  top:0;
 }
 
-/* Photo */
+/* PHOTO */
 .photo {
   width:200px;
   border-radius:15px;
-  margin-top:15px;
   box-shadow:0 4px 15px rgba(0,0,0,0.3);
 }
 
-/* Music button bottom */
+/* MUSIC BUTTON */
 #musicBtn {
   position: fixed;
-  bottom: 15px;
+  bottom: 18px;
   left: 50%;
   transform: translateX(-50%);
   padding:8px 20px;
@@ -77,7 +85,7 @@ button {
   border-radius:20px;
 }
 
-/* Falling hearts */
+/* FALLING HEARTS */
 .heart {
   position:fixed;
   top:-10px;
@@ -91,6 +99,7 @@ button {
   to { transform: translateY(100vh); }
 }
 
+/* MOBILE OPTIMIZATION */
 @media (max-width:600px){
   h1 {font-size:24px;}
   .photo {width:160px;}
@@ -106,8 +115,10 @@ button {
 
 <div id="loveTimer"></div>
 
-<button id="yesBtn" onclick="accepted()">YES ❤️</button>
-<button id="noBtn">NO</button>
+<div class="buttons">
+  <button id="yesBtn" onclick="accepted()">YES ❤️</button>
+  <button id="noBtn">NO</button>
+</div>
 
 <img src="photo.jpg" class="photo">
 
@@ -127,20 +138,21 @@ const music = document.getElementById("bgMusic");
 
 let yesScale = 1;
 
-/* Reliable music play */
-musicBtn.addEventListener("click", async () => {
-  try {
-    await music.play();
+/* MUSIC PLAY FIX */
+musicBtn.addEventListener("click", () => {
+  music.currentTime = 0;
+  music.play().then(() => {
     musicBtn.innerText = "🎵 Playing";
-  } catch(e) {
-    alert("Tap again to start music");
-  }
+  }).catch(() => {
+    alert("Tap again to enable sound");
+  });
 });
 
-/* Move NO + grow YES */
+/* NO RUNS + YES GROWS */
 function moveButton(){
-  const x=Math.random()*(window.innerWidth-100);
-  const y=Math.random()*(window.innerHeight-100);
+  const x=Math.random()*(window.innerWidth-120);
+  const y=Math.random()*(window.innerHeight-120);
+
   noBtn.style.left=x+"px";
   noBtn.style.top=y+"px";
 
@@ -151,7 +163,7 @@ function moveButton(){
 noBtn.addEventListener("mouseover",moveButton);
 noBtn.addEventListener("click",moveButton);
 
-/* YES accepted screen */
+/* YES ACCEPTED */
 function accepted(){
 document.body.innerHTML=`
 <div style="
@@ -170,7 +182,7 @@ color:white;font-family:Arial;padding:20px;">
 </div></div>`;
 }
 
-/* Love timer */
+/* LOVE TIMER */
 function updateLoveTimer(){
 const start=new Date("May 31, 2025 21:30:00").getTime();
 const now=new Date().getTime();
@@ -188,7 +200,7 @@ document.getElementById("loveTimer").innerHTML=
 setInterval(updateLoveTimer,60000);
 updateLoveTimer();
 
-/* Falling hearts */
+/* HEARTS */
 function createHeart(){
 const heart=document.createElement("div");
 heart.className="heart";
