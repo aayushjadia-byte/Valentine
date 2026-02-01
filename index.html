@@ -62,7 +62,20 @@ noBtn.addEventListener("click", moveButton);
 
 function accepted() {
   document.body.innerHTML =
-    "<h1>Yay Aditi ❤️<br>You made my day!</h1>";
+    "<h1 style='color:white;margin-top:120px;'>Yay Aditi ❤️<br>Best Valentine Ever!</h1>";
+
+  for(let i=0;i<100;i++){
+    const confetti=document.createElement("div");
+    confetti.innerHTML="🎉";
+    confetti.style.position="fixed";
+    confetti.style.left=Math.random()*100+"vw";
+    confetti.style.top="-10px";
+    confetti.style.fontSize="24px";
+    confetti.style.animation="fall 3s linear forwards";
+    document.body.appendChild(confetti);
+
+    setTimeout(()=>confetti.remove(),3000);
+  }
 }
 </script>
 <style>
