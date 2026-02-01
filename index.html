@@ -24,6 +24,7 @@ button {
   border-radius: 10px;
   cursor: pointer;
   margin: 10px;
+  transition: transform 0.2s ease;
 }
 
 #yesBtn {
@@ -75,21 +76,17 @@ button {
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 
-let yesSize = 24;
+let yesScale = 1;
 
-/* NO button escape */
+/* NO button escape + YES grows */
 function moveButton() {
   const x = Math.random() * (window.innerWidth - 100);
   const y = Math.random() * (window.innerHeight - 100);
   noBtn.style.left = x + "px";
   noBtn.style.top = y + "px";
 
-  // Increase YES button size
-  yesSize += 4;
-  yesBtn.style.fontSize = yesSize + "px";
-  yesBtn.style.padding =
-    (15 + yesSize / 4) + "px " +
-    (30 + yesSize / 3) + "px";
+  yesScale += 0.15;
+  yesBtn.style.transform = "scale(" + yesScale + ")";
 }
 
 noBtn.addEventListener("mouseover", moveButton);
